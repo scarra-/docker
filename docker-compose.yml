@@ -1,0 +1,44 @@
+nginx:
+    build: ./nginx/
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - app
+
+php:
+    build: ./php/
+    links:
+       - mysql
+    volumes_from:
+        - app
+
+mysql:
+    build: ./mysql/
+    ports:
+        - "3306:3306"
+    volumes_from:
+        - app
+
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+        - 8181:80
+    links:
+        - mysql
+    environment:
+        PMA_HOST: mysql
+
+data:
+    image: mariadb:latest
+    volumes: 
+       - /var/lib/mysql
+    command: 'true'
+
+app:
+    image: php:7.0-fpm
+    volumes:
+        - ./app:/var/www/html
+    command: 'true'
+    
