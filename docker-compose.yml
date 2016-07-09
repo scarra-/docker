@@ -19,7 +19,7 @@ mysql:
     ports:
         - "3306:3306"
     volumes_from:
-        - app
+        - data
 
 phpmyadmin:
     image: phpmyadmin/phpmyadmin

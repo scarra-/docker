@@ -1,4 +1,4 @@
-FROM mariadb:latest
+FROM mariadb:10.0
 
 ENV MYSQL_ROOT_PASSWORD="secret"
 ENV MYSQL_DATABASE="project"
